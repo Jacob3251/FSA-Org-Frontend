@@ -1,25 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomeLayout from "./pages/Layouts/HomeLayout";
+import LoginLayout from "./pages/Layouts/LoginLayout";
+import RegisterLayout from "./pages/Layouts/RegisterLayout";
+import AdminLayout from "./pages/Layouts/AdminLayout";
+import DonationLayout from "./pages/Layouts/DonationLayout";
+import BlogsLayout from "./pages/Layouts/BlogsLayout";
+import EventLayout from "./pages/Layouts/EventLayout";
+import ErrorElement from "./pages/Layouts/ErrorElement";
+import axios from "axios";
+import RequireAuth from "./pages/Shared/utilities/RequireAuth";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomeLayout></HomeLayout>,
+      loader: async () => {
+        const activities = await axios.get("deed.json");
+        const { data } = activities;
+        return data;
+      },
+    },
+    {
+      path: "/login",
+      element: <LoginLayout></LoginLayout>,
+    },
+    {
+      path: "/register",
+      element: <RegisterLayout></RegisterLayout>,
+    },
+    {
+      path: "/admin",
+      element: <AdminLayout></AdminLayout>,
+    },
+    {
+      path: "/donation",
+      element: (
+        <RequireAuth>
+          <DonationLayout></DonationLayout>
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/event",
+      element: (
+        <RequireAuth>
+          <EventLayout></EventLayout>
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "/blogs",
+      element: (
+        <RequireAuth>
+          <BlogsLayout></BlogsLayout>
+        </RequireAuth>
+      ),
+    },
+    {
+      path: "*",
+      element: <ErrorElement></ErrorElement>,
+    },
+  ]);
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

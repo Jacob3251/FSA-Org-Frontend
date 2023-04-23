@@ -1,0 +1,32 @@
+.btn {
+  padding: 5px 15px;
+  font-size: 16px;
+  transition-duration: 300ms;
+}
+.btn:hover {
+  scale: 1.05;
+  font-weight: 700;
+}
+.reg {
+  color: white;
+  font-size: 16px;
+  padding: 5px 15px;
+  border-radius: 6px;
+  transition-duration: 300ms;
+  background-color: #3f90fc;
+}
+.reg:hover {
+  border-radius: 0;
+}
+
+.admin {
+  color: white;
+  font-size: 16px;
+  padding: 5px 15px;
+  border-radius: 6px;
+  transition-duration: 300ms;
+  background: #434141;
+}
+.admin:hover {
+  border-radius: 0;
+}
