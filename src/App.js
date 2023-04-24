@@ -10,6 +10,7 @@ import EventLayout from "./pages/Layouts/EventLayout";
 import ErrorElement from "./pages/Layouts/ErrorElement";
 import axios from "axios";
 import RequireAuth from "./pages/Shared/utilities/RequireAuth";
+import SingleBlog from "./pages/SingleBlog/SingleBlog";
 function App() {
   const router = createBrowserRouter([
     {
@@ -56,6 +57,15 @@ function App() {
           <BlogsLayout></BlogsLayout>
         </RequireAuth>
       ),
+      loader: async () => {
+        const blogs = await axios.get("blogs.json");
+        const { data } = blogs;
+        return data;
+      },
+    },
+    {
+      path: "/blogs/:postId",
+      element: <SingleBlog></SingleBlog>,
       loader: async () => {
         const blogs = await axios.get("blogs.json");
         const { data } = blogs;
