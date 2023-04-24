@@ -56,6 +56,11 @@ function App() {
           <BlogsLayout></BlogsLayout>
         </RequireAuth>
       ),
+      loader: async () => {
+        const blogs = await axios.get("blogs.json");
+        const { data } = blogs;
+        return data;
+      },
     },
     {
       path: "*",
