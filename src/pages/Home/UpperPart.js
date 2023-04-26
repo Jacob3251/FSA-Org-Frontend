@@ -18,7 +18,7 @@ const UpperPart = () => {
           item.name.toUpperCase().includes(keyword.toUpperCase()) ||
           temp[i].toUpperCase().includes(keyword.toUpperCase())
         ) {
-          const original = filteredData.find((u) => u.id === item.id);
+          const original = filteredData.find((u) => u._id === item._id);
           if (!original) {
             filteredData.push(item);
           }

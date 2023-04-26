@@ -2,7 +2,7 @@ import React from "react";
 import { wordLimiter } from "../Shared/utilities/functions";
 import { useNavigate } from "react-router-dom";
 const Blog = ({ blog }) => {
-  const { type, author, content } = blog;
+  const { type, author, content, _id } = blog;
   const Type = type.toUpperCase();
   const Author = author.toUpperCase();
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Blog = ({ blog }) => {
           {wordLimiter(blog.content, 25)}...
         </p>
         <button
-          onClick={() => navigate(`/blogs/${blog.id}`)}
+          onClick={() => navigate(`/blogs/${_id}`)}
           className=" bg-white     font-semibold font-Mono text-[14px] my-5 w-full  duration-200  px-5 py-3"
         >
           Read full blog

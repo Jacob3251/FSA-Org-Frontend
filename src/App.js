@@ -11,13 +11,15 @@ import ErrorElement from "./pages/Layouts/ErrorElement";
 import axios from "axios";
 import RequireAuth from "./pages/Shared/utilities/RequireAuth";
 import SingleBlog from "./pages/SingleBlog/SingleBlog";
+import { useEffect } from "react";
+
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <HomeLayout></HomeLayout>,
       loader: async () => {
-        const activities = await axios.get("deed.json");
+        const activities = await axios.get("http://localhost:5000/events");
         const { data } = activities;
         return data;
       },
@@ -58,7 +60,7 @@ function App() {
         </RequireAuth>
       ),
       loader: async () => {
-        const blogs = await axios.get("blogs.json");
+        const blogs = await axios.get("http://localhost:5000/blogs");
         const { data } = blogs;
         return data;
       },
@@ -66,8 +68,10 @@ function App() {
     {
       path: "/blogs/:postId",
       element: <SingleBlog></SingleBlog>,
-      loader: async () => {
-        const blogs = await axios.get("blogs.json");
+      loader: async ({ params }) => {
+        const id = params.postId;
+        const blogs = await axios.get(`http://localhost:5000/blogs/${id}`);
+        // console.log("knocking single blog", postId);
         const { data } = blogs;
         return data;
       },
