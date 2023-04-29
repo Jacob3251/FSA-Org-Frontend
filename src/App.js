@@ -1,5 +1,10 @@
 import logo from "./logo.svg";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
 import HomeLayout from "./pages/Layouts/HomeLayout";
 import LoginLayout from "./pages/Layouts/LoginLayout";
 import RegisterLayout from "./pages/Layouts/RegisterLayout";
@@ -47,17 +52,17 @@ function App() {
     {
       path: "/event",
       element: (
-        <RequireAuth>
-          <EventLayout></EventLayout>
-        </RequireAuth>
+        // <RequireAuth>
+        <EventLayout></EventLayout>
+        // {/* </RequireAuth> */}
       ),
     },
     {
       path: "/blogs",
       element: (
-        <RequireAuth>
-          <BlogsLayout></BlogsLayout>
-        </RequireAuth>
+        // <RequireAuth>
+        <BlogsLayout></BlogsLayout>
+        // </RequireAuth>
       ),
       loader: async () => {
         const blogs = await axios.get("http://localhost:5000/blogs");
@@ -81,7 +86,11 @@ function App() {
       element: <ErrorElement></ErrorElement>,
     },
   ]);
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <div>
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
 }
 
 export default App;

@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../assets/images/companyLogo.png";
 import "./NavBar.css";
-import {
-  useAuthState,
-  useSignInWithGoogle,
-  useSignOut,
-} from "react-firebase-hooks/auth";
-import auth from "../../../firebase.init";
+
 import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { FaPowerOff } from "react-icons/fa";
+import { AuthContext } from "../../../contexts/userContext";
 const Navbar = () => {
-  // const [user, loading] = useSignInWithGoogle(auth);
-  const [signOut] = useSignOut(auth);
-  const [user, loading] = useAuthState(auth);
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const { user, logOut } = useContext(AuthContext);
   return (
     <div className="w-[85%] mx-auto  mt-0 flex justify-between  items-center font-Mono ">
       {/* Logo Part */}
@@ -49,20 +43,24 @@ const Navbar = () => {
         </div>
         {/* Login Menu */}
         <div className="flex justify-center items-center space-x-2">
-          <Link to="/register" className=" reg ">
-            Register
-          </Link>
           <Link to="/admin" className=" admin ">
             Admin
           </Link>
-          <span>{loading ? "Loading" : "Logged In"}</span>
-          <button
-            onClick={async () => {
-              await signOut();
-            }}
-          >
-            LogOut
-          </button>
+          {!user && (
+            <Link to="/login" className=" reg ">
+              Login
+            </Link>
+          )}
+          {user && (
+            <button
+              className="text-red-600 hover:bg-white border-2 border-transparent hover:border-red-600 rounded-full text-xl  p-1"
+              onClick={() => {
+                logOut();
+              }}
+            >
+              <FaPowerOff className="" />
+            </button>
+          )}
         </div>
       </div>
     </div>
