@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../Shared/Navbar/Navbar";
 import Carousel from "../Shared/Carousel/Carousel";
 import bkashLogo from "../../assets/images/bkash.png";
@@ -6,7 +6,8 @@ import nogodLogo from "../../assets/images/ngLogo.png";
 import Plans from "../Donation/Plans/Plans";
 const DonationLayout = () => {
   const [paymentMethod, setPaymentMethod] = useState("1");
-  const [donationPackage, setDonationPackage] = useState(0);
+  const [donationPackage, setDonationPackage] = useState("5");
+  const packageRef = useRef();
   const handleSelectPaymentMethod = (event) => {
     const method = event.target.value;
     setPaymentMethod(method);
@@ -14,14 +15,60 @@ const DonationLayout = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // full payement obj making remaining
+    let payemntInfo;
+    // nagad case
+    if (paymentMethod === "2") {
+      const accNum = event.target.nagadNum.value;
+      const transactionNum = event.target.nagadTransaction.value;
+      // console.log(accNum);
+      payemntInfo = {
+        name: "Nagad",
+        accountNumber: accNum,
+        transactionId: transactionNum,
+      };
+    }
+    // bkash case
+    if (paymentMethod === "3") {
+      const accNum = event.target.bkashNum.value;
+      const transactionNum = event.target.bkashTransaction.value;
+      // console.log(accNum);
+      payemntInfo = {
+        name: "Bkash",
+        accountNumber: accNum,
+        transactionId: transactionNum,
+      };
+    }
+
+    // Card Payment
+
+    if (paymentMethod === "4") {
+      const cardNum = event.target.cardNum.value;
+      const cvCode = event.target.cvCode.value;
+      const expDate = event.target.expDate.value;
+      const coupon = event.target.coupon.value;
+      // console.log(accNum);
+      payemntInfo = {
+        name: "Card Payment",
+        cardNumber: cardNum,
+        CVC: cvCode,
+        expDate: expDate,
+
+        couponCode: coupon,
+      };
+    }
+
     const details = {
       firstName: event.target.fname.value,
       lastName: event.target.lname.value,
       phnNumber: event.target.phnnum.value,
       email: event.target.email.value,
       donationPackage: donationPackage,
+      paymentType: paymentMethod,
+      paymentInformation: payemntInfo,
     };
     console.log(details);
+    alert("Donation Request Taken");
+    event.target.reset();
   };
   return (
     <div>
@@ -79,6 +126,7 @@ const DonationLayout = () => {
                   First Name
                 </label>
                 <input
+                  required
                   className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
                   type="text"
                   id="fname"
@@ -94,6 +142,7 @@ const DonationLayout = () => {
                   Last Name
                 </label>
                 <input
+                  required
                   className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
                   type="text"
                   id="lname"
@@ -114,6 +163,7 @@ const DonationLayout = () => {
                   type="number"
                   id="phnnum"
                   name="phnnum"
+                  required
                   placeholder="Enter PhoneNumber"
                   className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
                 />
@@ -129,6 +179,7 @@ const DonationLayout = () => {
                   type="email"
                   id="email"
                   name="email"
+                  required
                   placeholder="Enter Email"
                   className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
                 />
@@ -142,25 +193,29 @@ const DonationLayout = () => {
             </h3>
             <div className="flex w-full space-x-5 justify-start mb-2">
               <button
-                onClick={() => setDonationPackage(5)}
+                type="button"
+                onClick={() => setDonationPackage("5")}
                 className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono"
               >
                 $5
               </button>
               <button
-                onClick={() => setDonationPackage(10)}
+                type="button"
+                onClick={() => setDonationPackage("10")}
                 className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono"
               >
                 $10
               </button>
               <button
-                onClick={() => setDonationPackage(15)}
+                type="button"
+                onClick={() => setDonationPackage("15")}
                 className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono"
               >
                 $15
               </button>
               <button
-                onClick={() => setDonationPackage(20)}
+                type="button"
+                onClick={() => setDonationPackage("20")}
                 className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono"
               >
                 $20
@@ -202,23 +257,25 @@ const DonationLayout = () => {
                   <img className="h-[50px] w-[100px]" src={bkashLogo} alt="" />
                 </div>
                 <div className="font-Mono font-bold text-[16px] mb-2">
-                  <label htmlFor="bkash-num">Bkash Account Number: </label>
+                  <label htmlFor="bkashNum">Bkash Account Number: </label>
                   <input
                     type="text"
-                    name="bkash-num"
+                    required
+                    name="bkashNum"
                     placeholder="Enter Bkash Number"
-                    id="bkash-num"
+                    id="bkashNum"
                     className="shadow-gray-300 shadow-inner px-2 py-2 rounded-lg ml-2 text-[14px] outline-none"
                   />
                 </div>
                 <div className="font-Mono font-bold text-[16px]">
-                  <label htmlFor="bkash-transaction-num" className="">
+                  <label htmlFor="bkashTransactionNum" className="">
                     Enter Transaction Number:
                   </label>
                   <input
                     type="text"
-                    name="bkash-transaction"
-                    id="transaction-num"
+                    required
+                    name="bkashTransaction"
+                    id="bkashTransactionNum"
                     placeholder="Enter Transaction Number"
                     className="shadow-gray-300 shadow-inner px-2 py-2 rounded-lg ml-2 text-[14px] outline-none"
                   />
@@ -232,25 +289,27 @@ const DonationLayout = () => {
                   <img className="h-[50px] w-[100px]" src={nogodLogo} alt="" />
                 </div>
                 <div className="font-Mono font-bold text-[16px] mb-2">
-                  <label htmlFor="nagad-num" className="block mb-2">
+                  <label htmlFor="nagadNum" className="block mb-2">
                     Nagad Account Number
                   </label>
                   <input
                     type="text"
-                    name="nagad-num"
+                    name="nagadNum"
+                    required
                     placeholder="Enter Nagad Number"
-                    id="nagad-num"
+                    id="nagadNum"
                     className="shadow-gray-300 shadow-inner block px-2 py-2 rounded-lg  text-[14px] outline-none"
                   />
                 </div>
                 <div className="font-Mono font-bold text-[16px]  ">
-                  <label htmlFor="nagad-transaction-num" className="block mb-2">
+                  <label htmlFor="nagadTransactionNum" className="block mb-2">
                     Enter Transaction Number
                   </label>
                   <input
                     type="text"
-                    name="nagad-transaction"
-                    id="nagad-transaction-num"
+                    name="nagadTransaction"
+                    required
+                    id="nagadTransactionNum"
                     placeholder="Enter Transaction Number"
                     className="shadow-gray-300 shadow-inner block px-2 py-2 rounded-lg  text-[14px] outline-none"
                   />
@@ -264,7 +323,8 @@ const DonationLayout = () => {
                 <h3 className="font-bold text-[16px]">Card Number</h3>
                 <input
                   type="text"
-                  name="card-num"
+                  name="cardNum"
+                  required
                   placeholder="Valid Card Number"
                   className="text-[14px] border-2 border-gray-300 py-1 pl-1 rounded-md"
                 />
@@ -274,7 +334,8 @@ const DonationLayout = () => {
                     <h3 className="font-bold text-[14px]">EXPIRATION DATE</h3>
                     <input
                       type="date"
-                      name="exp-date"
+                      name="expDate"
+                      required
                       id=""
                       className="py-1 text-[14px] rounded-md font-bold font-Mono border-2 border-gray-200"
                     />
@@ -283,7 +344,8 @@ const DonationLayout = () => {
                     <h3 className="font-bold text-[14px]">CV CODE</h3>
                     <input
                       type="text"
-                      name="cv-code"
+                      name="cvCode"
+                      required
                       id=""
                       className="text-[14px] w-full border-2 border-gray-300 py-1 pl-1 rounded-md"
                     />
