@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Shared/Navbar/Navbar";
 import Carousel from "../Shared/Carousel/Carousel";
+import bkashLogo from "../../assets/images/bkash.png";
+import nogodLogo from "../../assets/images/ngLogo.png";
 import Plans from "../Donation/Plans/Plans";
 const DonationLayout = () => {
+  const [paymentMethod, setPaymentMethod] = useState("1");
+  const handleSelectPaymentMethod = (event) => {
+    const method = event.target.value;
+    setPaymentMethod(method);
+  };
   return (
     <div>
       <Navbar></Navbar>
@@ -34,7 +41,235 @@ const DonationLayout = () => {
       </div>
       {/* Carousel */}
       <Plans></Plans>
-      <div className="bg-red-500 w-full h-[100vh]"></div>
+      <div className="bg-orange-600 w-full h-[100vh] flex justify-center items-center">
+        <form className="bg-white w-[80%] mx-auto px-6">
+          <h3 className="font-Mono text-[36px] font-bold text-center my-5">
+            FSA ORG
+          </h3>
+          <h6 className="font-Robo font-semibold text-[24px] text-center bg-orange-200 py-2">
+            Donation Form
+          </h6>
+          {/* personal info */}
+          <div className="">
+            <div className="flex space-x-4">
+              <div className="w-full  flex flex-col">
+                <label
+                  htmlFor="fname"
+                  className="text-[18px] font-Mono font-semibold"
+                >
+                  First Name
+                </label>
+                <input
+                  className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  placeholder="Enter First Name"
+                />
+              </div>
+              <div className="w-full  flex flex-col">
+                <label
+                  htmlFor="lname"
+                  className="text-[18px] font-Mono font-semibold"
+                >
+                  Last Name
+                </label>
+                <input
+                  className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
+                  type="text"
+                  id="lname"
+                  name="lname"
+                  placeholder="Enter Last Name"
+                />
+              </div>
+            </div>
+            <div className="flex space-x-4 mt-3">
+              <div className="w-full  flex flex-col">
+                <label
+                  htmlFor="phnnum"
+                  className="text-[18px] font-Mono font-semibold"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="number"
+                  id="phnnum"
+                  name="phnnum"
+                  placeholder="Enter PhoneNumber"
+                  className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
+                />
+              </div>
+              <div className="w-full  flex flex-col">
+                <label
+                  htmlFor="email"
+                  className="text-[18px] font-Mono font-semibold"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter Email"
+                  className="w-full mt-1 shadow-inner shadow-gray-600 p-2 rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+          {/* payment info */}
+          <div className="w-[60%]  mt-2">
+            <h3 className="font-Mono text-[18px] font-bold mb-2">
+              Donation Packages:
+            </h3>
+            <div className="flex w-full space-x-5 justify-start mb-2">
+              <button className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono">
+                $5
+              </button>
+              <button className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono">
+                $10
+              </button>
+              <button className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono">
+                $15
+              </button>
+              <button className="px-6 text-[16px] py-2 rounded-lg hover:bg-white hover:text-orange-600 border-orange-600 border-2 bg-orange-600 text-white font-bold font-Mono">
+                $20
+              </button>
+            </div>
+            {/* payemnt method selection */}
+            <div className="font-Mono text-[18px] font-bold flex items-center mb-2">
+              <label htmlFor="payment-id">Select Payment Method: </label>
+              <select
+                onChange={handleSelectPaymentMethod}
+                name="payment-method"
+                id="payment-id"
+                className=" px-5 py-2 text-[16px]"
+              >
+                <option
+                  value="1"
+                  selected
+                  className="font-bold text-[14px]"
+                  disabled
+                >
+                  Select
+                </option>
+                <option value="2" className="font-bold text-[14px]">
+                  Nagad
+                </option>
+                <option value="3" className="font-bold text-[14px]">
+                  Bkash
+                </option>
+
+                <option value="4" className="font-bold text-[14px]">
+                  Card
+                </option>
+              </select>
+            </div>
+            {/* bkash */}
+            {paymentMethod === "3" && (
+              <div className="my-3" data-aos="flip-up">
+                <div className="flex justify-start items-center my-2">
+                  <img className="h-[50px] w-[100px]" src={bkashLogo} alt="" />
+                </div>
+                <div className="font-Mono font-bold text-[16px] mb-2">
+                  <label htmlFor="bkash-num">Bkash Account Number: </label>
+                  <input
+                    type="text"
+                    name="bkash-num"
+                    placeholder="Enter Bkash Number"
+                    id="bkash-num"
+                    className="shadow-gray-300 shadow-inner px-2 py-2 rounded-lg ml-2 text-[14px] outline-none"
+                  />
+                </div>
+                <div className="font-Mono font-bold text-[16px]">
+                  <label htmlFor="transaction-num" className="">
+                    Enter Transaction Number:
+                  </label>
+                  <input
+                    type="text"
+                    name="bkash-transaction"
+                    id="transaction-num"
+                    placeholder="Enter Transaction Number"
+                    className="shadow-gray-300 shadow-inner px-2 py-2 rounded-lg ml-2 text-[14px] outline-none"
+                  />
+                </div>
+              </div>
+            )}
+            {/* nagad */}
+            {paymentMethod === "2" && (
+              <div className="my-3" data-aos="flip-up">
+                <div className="flex justify-start items-center my-2">
+                  <img className="h-[50px] w-[100px]" src={nogodLogo} alt="" />
+                </div>
+                <div className="font-Mono font-bold text-[16px] mb-2">
+                  <label htmlFor="bkash-num">Bkash Account Number: </label>
+                  <input
+                    type="text"
+                    name="bkash-num"
+                    placeholder="Enter Bkash Number"
+                    id="bkash-num"
+                    className="shadow-gray-300 shadow-inner px-2 py-2 rounded-lg ml-2 text-[14px] outline-none"
+                  />
+                </div>
+                <div className="font-Mono font-bold text-[16px]  ">
+                  <label htmlFor="transaction-num" className="">
+                    Enter Transaction Number:
+                  </label>
+                  <input
+                    type="text"
+                    name="bkash-transaction"
+                    id="transaction-num"
+                    placeholder="Enter Transaction Number"
+                    className="shadow-gray-300 shadow-inner px-2 py-2 rounded-lg ml-2 text-[14px] outline-none"
+                  />
+                </div>
+              </div>
+            )}
+            {/* Card */}
+            {paymentMethod === "4" && (
+              <div className="font-Mono mb-5 " data-aos="flip-up">
+                <h1 className="text-[18px] font-bold">Payment Details</h1>
+                <h3 className="font-bold text-[16px]">Card Number</h3>
+                <input
+                  type="text"
+                  placeholder="Valid Card Number"
+                  className="text-[14px] border-2 border-gray-300 py-1 pl-1 rounded-md"
+                />
+
+                <div className="flex  justify-between w-full space-x-5 my-2 ">
+                  <div className="w-1/3">
+                    <h3 className="font-bold text-[14px]">EXPIRATION DATE</h3>
+                    <input
+                      type="date"
+                      name=""
+                      id=""
+                      className="py-1 text-[14px] rounded-md font-bold font-Mono border-2 border-gray-200"
+                    />
+                  </div>
+                  <div className="w-2/3">
+                    <h3 className="font-bold text-[14px]">CV CODE</h3>
+                    <input
+                      type="text"
+                      name=""
+                      id=""
+                      className="text-[14px] w-full border-2 border-gray-300 py-1 pl-1 rounded-md"
+                    />
+                  </div>
+                </div>
+                <h3 className="font-bold text-[14px] mt-2">COUPON CODE</h3>
+                <input
+                  type="text"
+                  className="border-2 border-gray-300 rounded-md py-[2px]"
+                />
+              </div>
+            )}
+          </div>
+          <input
+            type="submit"
+            value="SUBMIT"
+            className="w-full bg-orange-600 rounded-md py-2 text-[16px] font-Mono font-bold text-white hover:text-orange-600 hover:bg-white border-2 border-orange-600 duration-300 mb-8"
+          />
+        </form>
+      </div>
     </div>
   );
 };
