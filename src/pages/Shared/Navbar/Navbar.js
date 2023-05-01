@@ -26,18 +26,18 @@ const Navbar = () => {
       <div className="flex justify-center items-center space-x-2">
         {/* Regular Menu */}
         <div className="flex text-[#0B0B0B]">
-          <Link to="/" className="btn ">
+          <Link to="/" className="Btn ">
             Home
           </Link>
-          <Link to="/donation" className="btn ">
+          <Link to="/donation" className="Btn ">
             Donation
           </Link>
           {user && (
-            <Link to="/event" className="btn ">
+            <Link to="/event" className="Btn ">
               Events
             </Link>
           )}
-          <Link to="/blogs" className="btn ">
+          <Link to="/blogs" className="Btn ">
             Blogs
           </Link>
         </div>

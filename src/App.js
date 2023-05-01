@@ -40,6 +40,12 @@ function App() {
     {
       path: "/admin",
       element: <AdminLayout></AdminLayout>,
+      loader: async () => {
+        const { data } = await axios.get(
+          "http://localhost:5000/eventSelection"
+        );
+        return data;
+      },
     },
     {
       path: "/donation",

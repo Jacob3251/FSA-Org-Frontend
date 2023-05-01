@@ -105,7 +105,7 @@ const DonationLayout = () => {
       {/* Carousel */}
       <Plans></Plans>
       <div
-        className="bg-orange-600 w-full h-[100vh] flex justify-center items-center"
+        className="bg-orange-600 w-full h-[110vh] flex justify-center items-center"
         id="donationform"
       >
         <form onSubmit={handleSubmit} className="bg-white w-[30%] mx-auto px-6">

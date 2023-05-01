@@ -16,8 +16,8 @@ const Blog = ({ blog }) => {
         />
       </div>
       {/* Author and type  */}
-      <div className="bg-white bg-opacity-30 py-2 px-3 flex space-x-5 justify-between text-sm">
-        <h3 className=" py-2 px-5 font-semibold">{Type}</h3>
+      <div className="bg-[#f5f5f5] bg-opacity-30 py-2 px-3 flex space-x-5 justify-between text-[14px]">
+        <h3 className=" py-2 px-5 font-semibold ">{Type}</h3>
         <h3 className=" py-2 px-5 font-medium italic">{Author}</h3>
         {/* <h3 className="bg-yellow-300 py-2 ">Author</h3> */}
       </div>

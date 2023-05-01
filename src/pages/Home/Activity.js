@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../contexts/userContext";
+import axios from "axios";
 
 const Activity = ({ activity }) => {
-  // Tried to implement different colors randomly
-  // const colors = ["#FFBD3E", "#FF7044", "#3F90FC", "#00008B"];
-  // const x = parseInt(activity.id);
-  // const y = Math.floor(Math.random() * 3);
+  function getCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const seconds = now.getSeconds().toString().padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  }
 
+  const { user } = useContext(AuthContext);
+
+  const handleEventSelection = async () => {
+    const date = getCurrentTime();
+    if (user) {
+      const selectionData = {
+        name: user?.displayName,
+        event: activity.name,
+        eventDescription: activity.description,
+        eventId: activity._id,
+        email: user?.email,
+        date: date,
+      };
+      await axios
+        .post("http://localhost:5000/eventSelection", selectionData)
+        .then((response) => console.log(response.data));
+      // console.log(selectionData);
+    }
+  };
   return (
     <div
       style={{
         cursor: "pointer",
       }}
-      onClick={() => alert(activity.name)}
+      onClick={handleEventSelection}
       className={`bg-[#3F90FC] rounded-lg`}
       title={activity.description}
     >
