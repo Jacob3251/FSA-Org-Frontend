@@ -1,17 +1,11 @@
 import React, { useContext } from "react";
-import auth from "../../firebase.init";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import Loading from "../Shared/Loading/Loading";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/images/companyLogo.png";
 import { AuthContext } from "../../contexts/userContext";
 
 const LoginLayout = () => {
-  // const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-
-  const [user] = useSignInWithGoogle(auth);
-  const { createUserWithPopup, logOut } = useContext(AuthContext);
+  const { user, createUserWithPopup, logOut } = useContext(AuthContext);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();

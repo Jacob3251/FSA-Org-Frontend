@@ -5,7 +5,7 @@ const TableDesign = ({ data }) => {
   const handleParticipatedVolunteerDeletion = async (item) => {
     console.log("item to be deleted", item);
     await axios
-      .delete(`http://localhost:5000/eventSelection/${item._id}}`)
+      .delete(`http://localhost:5000/eventSelection/${item._id}`)
       .then((response) => console.log(response.data));
   };
   return (

@@ -1,7 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import app from "../firebase.init";
-// import { getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
-// import { GoogleAuthProvider } from "firebase/auth";
 import {
   GoogleAuthProvider,
   getAuth,
