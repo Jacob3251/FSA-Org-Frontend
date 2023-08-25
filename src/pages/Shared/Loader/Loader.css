@@ -1,0 +1,60 @@
+.loader {
+  height: 5vw;
+  width: 5vw;
+  border-radius: 50%;
+  border: 5px solid lightgray;
+  border-top: 5px solid gray;
+  animation: rotating_circle 2s ease-in-out infinite;
+  /* animation-delay: 2s; */
+}
+.loader1 {
+  height: 4vw;
+  width: 4vw;
+  border-radius: 50%;
+  border: 5px solid lightgray;
+  border-top: 5px solid gray;
+  animation: rotating_circle 1s ease-in-out infinite;
+  animation-delay: 0s;
+  /* transform: rotate(180deg); */
+}
+
+.text-animation {
+  animation: text_animation 2.6s linear infinite;
+}
+
+@keyframes rotating_circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes text_animation {
+  0% {
+    translate: -8px 0;
+    transform: scale(1);
+    /* font-weight: 400; */
+  }
+  25% {
+    translate: 0px 0;
+    transform: scale(1.1);
+    /* font-weight: 900; */
+  }
+  50% {
+    translate: 8px 0;
+    transform: scale(1);
+    /* font-weight: 400; */
+  }
+  75% {
+    translate: 0px 0;
+    transform: scale(1.1);
+    /* font-weight: 900; */
+  }
+  100% {
+    translate: -8px 0;
+    transform: scale(1);
+    /* font-weight: 400; */
+  }
+}

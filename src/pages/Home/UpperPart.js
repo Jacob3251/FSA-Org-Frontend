@@ -59,7 +59,7 @@ const UpperPart = () => {
 
   return (
     <div className=" py-10 flex justify-center items-center flex-col ">
-      <h3 className="text-[36px] text-black font-Mono font-bold mb-8">
+      <h3 className="text-[24px] md:text-[36px]  text-center text-amber-800 drop-shadow-md font-Robo font-bold mb-8">
         START SOCIAL WORK FOR GETTING REPUTATION
       </h3>
       <form

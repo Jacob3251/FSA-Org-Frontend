@@ -9,6 +9,7 @@ const Home = () => {
   return (
     <div className="relative ">
       <img
+        alt="bg_image"
         src={mainImg}
         className="bg-img absolute top-0 left-0 h-[500px] w-[100%]"
       />

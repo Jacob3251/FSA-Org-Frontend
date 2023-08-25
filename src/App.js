@@ -17,7 +17,7 @@ import axios from "axios";
 import RequireAuth from "./pages/Shared/utilities/RequireAuth";
 import SingleBlog from "./pages/SingleBlog/SingleBlog";
 import { useEffect } from "react";
-
+import toast, { Toaster } from "react-hot-toast";
 function App() {
   const router = createBrowserRouter([
     {
@@ -95,6 +95,7 @@ function App() {
   return (
     <div>
       <RouterProvider router={router}></RouterProvider>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 }

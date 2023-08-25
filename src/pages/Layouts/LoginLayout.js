@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../assets/images/companyLogo.png";
 import { AuthContext } from "../../contexts/userContext";
 
 const LoginLayout = () => {
-  const { user, createUserWithPopup, logOut } = useContext(AuthContext);
+  const { user, signInWithGooglePopUp, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const navigate = useNavigate();
-  let errorElement;
-  if (user) {
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate, user]);
 
   return (
     <div className=" w-[34%] mx-auto flex flex-col justify-center items-center">
@@ -36,12 +37,7 @@ const LoginLayout = () => {
 
         <button
           className="flex  items-center border-[#C7C7C7] border-2 font-Mono text-[16px] rounded-full pl-1 py-[6px] w-full"
-          onClick={() => {
-            // user && console.log("before login", user?.displayName);
-            createUserWithPopup().then(() => {
-              user && console.log("after login", user?.displayName);
-            });
-          }}
+          onClick={signInWithGooglePopUp}
         >
           <FcGoogle className="text-4xl mr-[24%]" />
           <span className="text-black text-[16px] font-semibold font-Mono">
@@ -59,7 +55,7 @@ const LoginLayout = () => {
           </button>
         </h3>
         {user && <button onClick={() => logOut()}>Log out</button>}
-        {errorElement}
+        {/* {errorElement} */}
       </div>
     </div>
   );

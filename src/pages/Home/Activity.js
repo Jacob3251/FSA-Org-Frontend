@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/userContext";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Activity = ({ activity }) => {
   function getCurrentTime() {
@@ -26,8 +27,12 @@ const Activity = ({ activity }) => {
       };
       await axios
         .post("http://localhost:5000/eventSelection", selectionData)
-        .then((response) => console.log(response.data));
+        .then((response) => {
+          toast.success("Successfully enrolled!");
+        });
       // console.log(selectionData);
+    } else {
+      toast.error("You need to be signed in silly!!");
     }
   };
   return (
@@ -36,19 +41,13 @@ const Activity = ({ activity }) => {
         cursor: "pointer",
       }}
       onClick={handleEventSelection}
-      className={`bg-[#3F90FC] rounded-lg`}
+      className={`home-cart`}
       title={activity.description}
     >
-      <div className="overflow-hidden rounded-t-lg">
-        <img
-          src={activity.link}
-          alt=""
-          className="hover:opacity-80 scale-105 duration-500 hover:scale-110 "
-        />
+      <div className="home-cart-img-div">
+        <img src={activity.link} alt="" className="home-cart-img" />
       </div>
-      <h3 className="p-5 text-center text-white font-semibold font-Mono">
-        {activity.name}
-      </h3>
+      <h3 className="home-cart-text">{activity.name}</h3>
     </div>
   );
 };
