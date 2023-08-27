@@ -26,6 +26,9 @@ const Plans = () => {
   ];
   return (
     <div className="my-[60px]">
+      <h2 className="text-center font-Robo text-[32px] drop-shadow-md mb-5 underline pb-2">
+        Our Monthly Membership Plans!!
+      </h2>
       <Plan plans={planDetail}></Plan>
     </div>
   );

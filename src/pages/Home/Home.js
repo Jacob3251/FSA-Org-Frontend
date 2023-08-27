@@ -17,7 +17,7 @@ const Home = () => {
         <Navbar></Navbar>
         <UpperPart></UpperPart>
         <Activities></Activities>
-        <Footer footercls={""}></Footer>
+        <Footer footercls={"mt-5"}></Footer>
       </div>
     </div>
   );
