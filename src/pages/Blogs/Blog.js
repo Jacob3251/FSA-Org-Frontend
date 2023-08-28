@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { wordLimiter } from "../Shared/utilities/functions";
 import { useNavigate } from "react-router-dom";
+import { BlogContext } from "../../contexts/blogContext";
+import { AuthContext } from "../../contexts/userContext";
 const Blog = ({ blog }) => {
   const { type, author, content, _id } = blog;
   const Type = type.toUpperCase();
   const Author = author.toUpperCase();
   const navigate = useNavigate();
+  const { setParentPost } = useContext(AuthContext);
   return (
     <div className="cursor-pointer bg-[#D3D3D3] rounded-t-[15px]">
       <div className=" overflow-hidden rounded-t-[15px]">
@@ -16,9 +19,9 @@ const Blog = ({ blog }) => {
         />
       </div>
       {/* Author and type  */}
-      <div className="bg-[#f5f5f5] bg-opacity-30 py-2 px-3 flex space-x-5 justify-between text-[14px]">
-        <h3 className=" py-2 px-5 font-semibold ">{Type}</h3>
-        <h3 className=" py-2 px-5 font-medium italic">{Author}</h3>
+      <div className="bg-[#f5f5f5] bg-opacity-30 py-2 px-3 flex space-x-5 justify-between text-[14px] overflow-hidden">
+        <h3 className=" py-2  font-semibold ">{Type}</h3>
+        <h3 className=" py-2  font-medium italic">{Author}</h3>
         {/* <h3 className="bg-yellow-300 py-2 ">Author</h3> */}
       </div>
       {/* content part */}
@@ -30,7 +33,11 @@ const Blog = ({ blog }) => {
           {wordLimiter(blog.content, 25)}...
         </p>
         <button
-          onClick={() => navigate(`/blogs/${_id}`)}
+          onClick={() => {
+            setParentPost(_id);
+            navigate(`/blogs/${_id}`);
+            // alert(_id);
+          }}
           className=" bg-white     font-semibold font-Mono text-[14px] my-5 w-full  duration-200  px-5 py-3"
         >
           Read full blog

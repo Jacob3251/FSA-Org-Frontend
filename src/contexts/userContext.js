@@ -16,6 +16,8 @@ const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [parentPost, setParentPost] = useState("");
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -63,7 +65,14 @@ const UserContext = ({ children }) => {
   };
   // const auth = getAuth();
 
-  const authInfo = { user, signInWithGooglePopUp, logOut, loading };
+  const authInfo = {
+    user,
+    signInWithGooglePopUp,
+    logOut,
+    loading,
+    parentPost,
+    setParentPost,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

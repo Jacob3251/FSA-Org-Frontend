@@ -5,6 +5,9 @@
 @tailwind utilities;
 
 @layer components {
+  .text-wrap {
+    text-wrap: wrap;
+  }
   /* Used on activity component */
   .home-cart {
     @apply bg-opacity-60 drop-shadow-lg md:bg-[#3F90FC] bg-white  rounded-lg flex flex-row justify-start items-center md:flex-col h-[120px] md:h-auto overflow-hidden;
