@@ -1,23 +1,11 @@
-# Authentication Remaining ## Done
-
-# login page ##Done
-
-# Register
-
-# user events (current obj)
-
-# Admin => { Table showing information, Adding a new task }
-
-# Donation
-
-# Blogs
+#Features: 
+* CRUD Operations
+* User Authentication
+* Activity search implemented
+* Admin panel to add events, blogs, verifiy payment operations
 
 //
-
-## Home Page Done
-
-//
-Packages:
+#Packages Used:
 tailwind
 react-icons
 react-firebase-hooks
@@ -27,12 +15,8 @@ axios
 firebase
 react-loader-spinner
 
-fonts:
 
-- Montserrat,
-- Avenir (buttons on login and register buttons
-
-Routes:
+#Routes Available:
 
 -Home
 -Login
